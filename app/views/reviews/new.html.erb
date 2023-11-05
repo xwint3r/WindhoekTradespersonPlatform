@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center">New Review</h2>
+
+      <%= form_for [@service, @review] do |f| %>
+        <div class="form-group">
+          <%= f.label :content, "Your Review" %>
+          <%= f.text_area :content, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :rating, "Rating (1-5)" %>
+          <div class="rating">
+            <% (1..5).each do |i| %>
+              <%= f.radio_button :rating, i, id: "star#{i}" %>
+              <%= label_tag "star#{i}", "★" %>
+            <% end %>
+          </div>
+        </div>
+
+        <%= f.hidden_field :service_id, value: @service.id %>
+
+        <div class="form-group text-center">
+          <%= f.submit "Submit Review", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Your HTML form remains unchanged as previously provided -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.rating input[type="radio"]');
+  
+    stars.forEach((star, index) => {
+      star.addEventListener('change', function() {
+        const selectedValue = parseInt(this.value);
+        stars.forEach((s, i) => {
+          if (i < selectedValue) {
+            s.nextElementSibling.style.color = '#FFD700'; // Change color for stars selected and those before
+          } else {
+            s.nextElementSibling.style.color = '#ccc'; // Default color for unselected stars
+          }
+        });
+      });
+    });
+  });
+</script>

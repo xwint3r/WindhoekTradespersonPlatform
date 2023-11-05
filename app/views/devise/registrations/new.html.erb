@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center">Sign Up</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="form-group">
+          <% if resource.errors.any? %>
+            <div class="alert alert-danger">
+              <ul>
+                <% resource.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group"> 
+        <%= f.label :firstname, "First Name" %>
+        <%= f.text_field :firstname, autocomplete: "given-name", class: "form-control" %>
+      </div>
+
+      <div class="form-group"> 
+        <%= f.label :lastname, "Last Name" %>
+        <%= f.text_field :lastname, autocomplete: "family-name", class: "form-control" %>
+      </div>
+
+      <div class="form-group"> 
+	      <%= f.label :username %> <%= f.text_field :username, autocomplete: "username", class: "form-control" %> 
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+        
+        
+
+        <div class="form-group">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :role, class: "form-check-label" %>
+          <div class="form-check">
+            <%= f.radio_button :role, "customer", class: "form-check-input" %>
+            <%= f.label :role_customer, "Customer", class: "form-check-label" %>
+          </div>
+          <div class="form-check">
+            <%= f.radio_button :role, "businessperson", class: "form-check-input" %>
+            <%= f.label :role_businessperson, "Business Person", class: "form-check-label" %>
+          </div>
+          <p class="text-muted">Don't worry, you can change this later in your profile settings.</p>
+        </div>
+        
+
+        <div class="form-group text-center">
+          <%= f.submit "Sign up", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>

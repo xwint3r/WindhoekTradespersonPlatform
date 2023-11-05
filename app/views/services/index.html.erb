@@ -1,0 +1,70 @@
+<!-- heeder moved to _header.html.erb as a partial -->
+<section id="hero" class="container text-center py-5">
+<h1 class="display-4">Windhoek Tradesman Directory</h1>
+<p class="lead">Where you come to find the right people, right where you are.</p>
+<br>
+<div class="row">
+  <div class="col">
+    <%= form_tag search_services_path, method: :get do |f| %>
+      <div class="input-group my-4">
+        <%= text_field_tag :search, nil, placeholder: "Plumber...", class: "form-control" %>
+      </div>
+      <div class="input-group my-4">
+        <div class="input-group-prepend">
+          <%= text_field_tag :location, nil, placeholder: "Academia...", class: "form-control" %>
+        </div>
+
+        <div class="input-group-append">
+        <%= select_tag :category, options_for_select(Category.all.map{ |c| [c.name, c.id]}.unshift(['All Categories', nil])), class: "form-control" %>
+        </div>
+        
+      </div>
+      <div class="input-group my-4">
+        <%= submit_tag "Search", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+</section>
+
+<section id="services" class="container text-center py-5">
+<div class="row">
+    <!-- Placeholder cards, replace with data from the database -->
+    <% @services.each do |service| %>
+      <div class="col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <%= link_to service_path(service) do %>
+              <h2 class="card-title"><%= service.name %></h2>
+            <% end %>
+            <div class="bubble">
+              <span>Price Range: <%= number_to_currency(service.price) %></span>
+            </div>
+            <div class="bubble">
+              <span>Category: <%= service.category.name %></span>
+            </div>
+            <div class="bubble">
+              <span>Location: <%= service.location.name %></span>
+            </div>
+            <div class="bubble">
+            <% if service.reviews.present? %>
+            <span><%= display_stars(service.reviews.average(:rating).round(0)) %> </span>
+            <% else %>
+              <span>No rating</span>
+            <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
+    <% end %>  
+<br>
+</section>
+
+
+
+    <!-- footer moved to _footer.html.erb partial -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

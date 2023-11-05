@@ -1,0 +1,200 @@
+/* Reset some default styles */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Hero section styles */
+#hero {
+    background-color: #f2f2f2;
+    padding: 40px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 70%;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.categories {
+    margin-top: 20px;
+}
+
+.categories button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Service card styles */
+.service-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto; /* Center-align the cards and remove margin-top */
+    width: 90%; /* Set the width to match the search bar */
+    height: auto; /* Allow the cards to expand in height */
+}
+
+.service-card h2 {
+    font-size: 24px;
+}
+
+.bubble {
+    background-color: #333;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Service page styles */
+#service-page {
+    padding: 40px;
+}
+
+#service-page header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-card {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    flex: 1;
+    text-align: center;
+}
+
+.profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-info {
+    flex: 3;
+    padding: 0 20px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.star-rating {
+    font-size: 20px;
+    color: #FFD700; /* Gold color for stars */
+}
+
+.review-count {
+    margin-left: 5px;
+    color: #666;
+}
+
+.call-button,
+.chat-button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-carousel {
+    /* Add styles for the image carousel container here */
+}
+
+.service-description {
+    margin-top: 20px;
+}
+
+.service-description h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.rating input[type="radio"] {
+    display: none; /* Hide the default radio buttons */
+}
+  
+.rating label {
+    font-size: 30px; /* Set the size of the star icon */
+    color: #ccc; /* Default color for unselected stars */
+}
+  
+.rating input[type="radio"]:checked ~ label {
+    color: #FFD700; /* Change color for selected stars */
+}

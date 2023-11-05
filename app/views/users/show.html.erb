@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <img src="tradesman-profile.jpg" alt="Tradesman" class="card-img-top rounded-circle">
+        <div class="card-body text-center">
+          <h2 class="card-title"><%= current_user.username %></h2> <!-- Display the logged-in user's username -->
+          <div class="d-flex justify-content-center align-items-center">
+            <span class="text-warning">★★★★★</span>
+            <span class="ml-2">(15 reviews)</span>
+          </div>
+          <p>Joined <%= current_user.created_at.strftime("%Y") %></p> <!-- Assuming the user model has a 'created_at' attribute -->
+          <p>Number of services: <%= current_user.services.count %></p> <!-- Display the count of user's services -->
+          <p>Bio: A brief description of the tradesman and their services.</p>
+          <% if current_user.businessperson? %> <!-- Check if the user is a businessperson -->
+            <%= link_to "Add Service", new_service_path, class: "btn btn-primary" %>
+          <% end %>
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h2>Services</h2>
+      <!-- Service Cards -->
+      <% current_user.services.each do |service| %> <!-- Loop through the user's services -->
+        <div class="col-md-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title"><%= service.name %></h2>
+              <div class="bubble">
+                <span>Price Range: <%= number_to_currency(service.price) %></span>
+              </div>
+              <div class="bubble">
+                <span>Category: <%= service.category.name %></span>
+              </div>
+              <div class="bubble">
+                <span>Location: <%= service.location.name %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- Add more service cards as needed -->
+    </div>
+  </div>
+</div>

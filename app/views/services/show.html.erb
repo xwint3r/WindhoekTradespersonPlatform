@@ -1,0 +1,99 @@
+
+<% content_for :title, @service.name %>
+
+    <div class="container">
+        <header class="text-center mt-5">
+            <h1><%= @service.name %></h1> <!-- Display the service name -->
+            <p><%= @service.description %></p> <!-- Display the service description -->
+        </header>
+
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Add image carousel here using Bootstrap's carousel component -->
+                <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <% @service.service_pictures.each_with_index do |image, index| %>
+                        <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+                            <%= image_tag image.url, class: "d-block w-100", alt: "Service Image" %>
+                        </div>
+                        <% end %>
+                    </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+
+                <div class="mt-4">
+                    <h2>Service Details</h2>
+                    <p><%= @service.description %></p> <!-- Display the service description -->
+                    <p><strong>Price:</strong> <%= number_to_currency(@service.price) %></p> <!-- Display the service price -->
+                    <p><strong>Location:</strong> <%= @service.location.name %></p> <!-- Display the service location -->
+                    <p><strong>Category:</strong> <%= @service.category.name %></p> <!-- Assuming you have a category associated with the service -->
+                </div>
+
+                <div class="mt-4">
+                    <h3>Reviews</h3>
+                    <% if @reviews.empty? %>
+                        <p>No reviews yet</p>
+                    <% else %>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @reviews.each do |review| %>
+                                    <tr>
+                                        <td><h5><%= review.user.username %></h5></td>
+                                        <td><%= review.created_at.strftime('%B %d, %Y') %></td>
+                                        <td>
+                                            <div><%= display_stars(review.rating) %></div>
+                                            <%= review.content %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    <% end %>
+                </div>
+
+            </div>
+			
+			 <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="tony-stark-profile.jpg" alt="Tony Stark" class="card-img-top rounded-circle">
+                    <div class="card-body text-center">
+                        <h2 class="card-title"><%= @service.user.username %></h2> <!-- Display the service provider's username -->
+                        <div class="d-flex justify-content-center align-items-center">
+                            <span class="ml-2"><%= display_stars(@avg_rating) %></span>
+                            <span class="ml-2">(<%= @reviews.size %> reviews)</span>
+                        </div>
+                        <% unless @service.user == current_user %>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <%= link_to "Leave A Review", new_service_review_path(@service), class: "btn btn-primary btn-block mt-3" %>
+                            </div>
+                        <% end %>
+                        <a href="#" class="btn btn-primary btn-block mt-3">Call</a>
+                        <a href="#" class="btn btn-secondary btn-block">Chat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="jquery.raty.js"></script>
+
