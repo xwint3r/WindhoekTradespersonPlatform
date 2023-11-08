@@ -33,8 +33,12 @@
                     <h2>Service Details</h2>
                     <p><%= @service.description %></p> <!-- Display the service description -->
                     <p><strong>Price:</strong> <%= number_to_currency(@service.price) %></p> <!-- Display the service price -->
-                    <p><strong>Location:</strong> <%= @service.location.name %></p> <!-- Display the service location -->
-                    <p><strong>Category:</strong> <%= @service.category.name %></p> <!-- Assuming you have a category associated with the service -->
+                    <%= link_to search_by_category_services_path(category: @service.category.id), style: "color: black; text-decoration: none;" do %>
+                        <p><strong>Category:</strong> <%= @service.category.name %></p>
+                    <% end %>
+                      <%= link_to search_by_location_services_path(location: @service.location.name), style: "color: black; text-decoration: none;" do %>
+                        <p><strong>Location:</strong> <%= @service.location.name %></p>
+                      <% end %>
                 </div>
 
                 <div class="mt-4">
