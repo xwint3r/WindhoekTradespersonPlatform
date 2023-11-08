@@ -39,15 +39,25 @@
             <%= link_to service_path(service) do %>
               <h2 class="card-title"><%= service.name %></h2>
             <% end %>
+            <%= link_to user_profile_path(service.user.username) do %>
+              <h5>by: <%= service.user.username %> </h5>
+            <% end %>
             <div class="bubble">
-              <span>Price Range: <%= number_to_currency(service.price) %></span>
+              <span>Price: <%= number_to_currency(service.price) %></span>
             </div>
-            <div class="bubble">
-              <span>Category: <%= service.category.name %></span>
-            </div>
-            <div class="bubble">
-              <span>Location: <%= service.location.name %></span>
-            </div>
+            
+            <%= link_to search_by_category_services_path(category: service.category.id), do %>
+              <div class="bubble">
+                <span>Category: <%= service.category.name %></span>
+              </div>
+              <% end %>
+
+            <%= link_to search_by_location_services_path(location: service.location.name), do %>
+              <div class="bubble">
+                <span>Location: <%= service.location.name %></span>
+              </div>
+            <% end %>
+
             <div class="bubble">
             <% if service.reviews.present? %>
             <span><%= display_stars(service.reviews.average(:rating).round(0)) %> </span>

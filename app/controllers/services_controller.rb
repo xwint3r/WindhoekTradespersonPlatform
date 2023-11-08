@@ -44,6 +44,14 @@ class ServicesController < ApplicationController
       @services = Service.includes(:location, :reviews).search(params)
     end
 
+    def search_by_location
+      @services = Service.includes(:location, :reviews).searchlocation(params)
+    end
+
+    def search_by_category
+      @services = Service.includes(:location, :reviews).where(category_id: params[:category])
+    end
+
     def create
       @service = current_user.services.build(service_params)
   

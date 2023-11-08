@@ -56,7 +56,11 @@
                                         <td><h5><%= review.user.username %></h5></td>
                                         <td><%= review.created_at.strftime('%B %d, %Y') %></td>
                                         <td>
-                                            <div><%= display_stars(review.rating) %></div>
+                                            <div>
+                                                <H6>Star Rating</h6>
+                                                <%= display_stars(review.rating) %>
+                                            </div>
+                                            <h6>Review</h6>
                                             <%= review.content %>
                                         </td>
                                     </tr>
@@ -72,7 +76,9 @@
                 <div class="card mb-4">
                     <img src="tony-stark-profile.jpg" alt="Tony Stark" class="card-img-top rounded-circle">
                     <div class="card-body text-center">
-                        <h2 class="card-title"><%= @service.user.username %></h2> <!-- Display the service provider's username -->
+                        <%= link_to user_profile_path(@service.user.username) do %>
+                            <h2 class="card-title">by: <%= @service.user.username %> </h2>
+                            <% end %>
                         <div class="d-flex justify-content-center align-items-center">
                             <span class="ml-2"><%= display_stars(@avg_rating) %></span>
                             <span class="ml-2">(<%= @reviews.size %> reviews)</span>
@@ -89,6 +95,7 @@
             </div>
         </div>
     </div>
+    <br>
 
     <!-- Include Bootstrap JavaScript and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

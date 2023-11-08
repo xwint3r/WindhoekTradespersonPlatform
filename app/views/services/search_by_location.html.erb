@@ -1,0 +1,35 @@
+<% if @services.present? %>
+  <h2>Services in <%= @services.first.location.name %></h2>
+<% @services.each do |service| %>
+    <div class="col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <%= link_to service_path(service) do %>
+            <h2 class="card-title"><%= service.name %></h2>
+          <% end %>
+            <%= link_to user_profile_path(service.user.username) do %>
+              <h5>by: <%= service.user.username %> </h5>
+              <% end %>
+          <div class="bubble">
+            <span>Price: <%= number_to_currency(service.price) %></span>
+          </div>
+          <div class="bubble">
+            <span>Category: <%= service.category.name %></span>
+          </div>
+          <div class="bubble">
+            <span>Location: <%= service.location.name %></span>
+          </div>
+          <div class="bubble">
+            <% if service.reviews.present? %>
+              <%= display_stars(service.reviews.average(:rating).round(0)) %>
+            <% else %>
+              No rating
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>  
+<% else %>
+    <p>No services found.</p>
+<% end %>

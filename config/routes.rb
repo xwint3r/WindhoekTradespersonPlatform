@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :services do
     resources :reviews, except: [:index, :show]
     collection do
-      get 'search'
+      get 'search', 'search_by_location', 'search_by_category'
     end
   end
 
@@ -15,10 +15,12 @@ Rails.application.routes.draw do
 
   get "/about_us", to: "pages#about_us"
   get "/contact_us", to: "pages#contact_us" 
-  #get "/profile", to: "users#show" # link to logged in user profile
+  
 
   get "/profile", to: "users#show", as: "current_user_profile"
   get "/profile/:username", to: "users#show_by_username", as: "user_profile"
+
+  #get "/services/search_by_location/:location_name", to: "services#search_by_location", as: "services_search_by_location"
 
 
 end

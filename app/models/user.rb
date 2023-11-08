@@ -17,6 +17,17 @@ class User < ApplicationRecord
     # UNCOMMENT after you've seeded user in the schema with :profile picture
     #mount_uploader :profile_picture, ProfilePictureUploader # to upload profile picture
 
+    def average_rating
+      services_with_reviews = services.includes(:reviews).where.not(reviews: { rating: nil })
+      total_ratings = services_with_reviews.sum { |service| service.reviews.average(:rating).round(0) }
+      total_ratings / services_with_reviews.size
+    end
+
+    def total_num_ratings
+      services_with_reviews = services.includes(:reviews).where.not(reviews: { rating: nil })
+      services_with_reviews.size
+    end
+
 
     def self.find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup

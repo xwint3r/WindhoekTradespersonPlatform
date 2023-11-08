@@ -7,8 +7,14 @@
         <div class="card-body text-center">
           <h2 class="card-title"><%= @user.username %></h2> <!-- Display the logged-in user's username -->
           <div class="d-flex justify-content-center align-items-center">
-            <span class="text-warning">★★★★★</span>
-            <span class="ml-2">(15 reviews)</span>
+
+          <% if @avg_rating_total.present? %>                                                          
+           <span class="ml-2"><p>Average Rating: <%= display_stars(@avg_rating_total) %></p></span>  
+           <span class="ml-2"><p>(<%= @num_of_reviews %> reviews)</p></span>                         
+          <% else %>                                                                                   
+           <p>No reviews yet</p>                                                                        
+          <% end %>                                                                                    
+
           </div>
           <p>Joined <%= @user.created_at.strftime("%Y") %></p> <!-- Assuming the user model has a 'created_at' attribute -->
           <p>Number of services: <%= @user.services.count %></p> <!-- Display the count of user's services -->
@@ -51,14 +57,23 @@
                 <% end %>
               </div>      
               <div class="bubble">
-                <span>Price Range: <%= number_to_currency(service.price) %></span>
+                <span>Price: <%= number_to_currency(service.price) %></span>
               </div>
+              
+              <%= link_to search_by_category_services_path(category: service.category.id), class: "location-link" do %>
               <div class="bubble">
                 <span>Category: <%= service.category.name %></span>
               </div>
+              <% end %>
+
+              <%= link_to search_by_location_services_path(location: service.location.name), class: "location-link" do %>
               <div class="bubble">
                 <span>Location: <%= service.location.name %></span>
               </div>
+              <% end %>
+
+
+
               <div class="bubble">
                 <% if service.reviews.present? %>
                   <%= display_stars(service.reviews.average(:rating).round(0)) %>

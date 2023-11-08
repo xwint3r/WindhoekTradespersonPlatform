@@ -47,6 +47,36 @@ class Service < ApplicationRecord
     services
   end
 
+
+  def self.searchlocation(params)
+    services = Service.all
+  
+    #services = services.where(category_id: params[:category]) if params[:category].present?
+    #services = services.where("name LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
+  
+    windhoek_location = "Windhoek, Namibia"
+    if params[:location].present?
+      location_name = "#{params[:location]}, #{windhoek_location}"
+      result = Geocoder.search(location_name).first
+  
+      if result
+        latitude = result.latitude
+        longitude = result.longitude
+        services = Service.near([latitude, longitude], 1, units: :km) if latitude && longitude
+      end
+    end
+  
+    services
+  end
+
+  def self.searchcategory(params)
+    services = Service.all
+  
+    services = services.where(category_id: params[:category]) if params[:category].present?
+     
+    services
+  end
+
   private
 
   def validate_image
