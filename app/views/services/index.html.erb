@@ -46,13 +46,13 @@
               <span>Price: <%= number_to_currency(service.price) %></span>
             </div>
             
-            <%= link_to search_by_category_services_path(category: service.category.id), do %>
+            <%= link_to search_by_category_services_path(category: service.category.id) do %>
               <div class="bubble">
                 <span>Category: <%= service.category.name %></span>
               </div>
               <% end %>
 
-            <%= link_to search_by_location_services_path(location: service.location.name), do %>
+            <%= link_to search_by_location_services_path(location: service.location.name) do %>
               <div class="bubble">
                 <span>Location: <%= service.location.name %></span>
               </div>
