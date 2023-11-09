@@ -1,5 +1,12 @@
 /* Reset some default styles */
-body, h1, p {
+body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1, p {
     margin: 0;
     padding: 0;
 }
@@ -10,6 +17,17 @@ header {
     color: white;
     padding: 10px 0;
 }
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Push main content to the top */
+  .content {
+    flex: 1;
+  }
 
 nav {
     display: flex;

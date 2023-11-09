@@ -20,8 +20,14 @@ class User < ApplicationRecord
     def average_rating
       services_with_reviews = services.includes(:reviews).where.not(reviews: { rating: nil })
       total_ratings = services_with_reviews.sum { |service| service.reviews.average(:rating).round(0) }
-      total_ratings / services_with_reviews.size
+      
+      if services_with_reviews.size.positive?
+        total_ratings / services_with_reviews.size
+      else
+        0 # or any default value you prefer when there are no reviews available
+      end
     end
+    
 
     def total_num_ratings
       services_with_reviews = services.includes(:reviews).where.not(reviews: { rating: nil })

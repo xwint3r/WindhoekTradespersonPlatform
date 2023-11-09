@@ -78,11 +78,13 @@
 			
 			 <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="tony-stark-profile.jpg" alt="Tony Stark" class="card-img-top rounded-circle">
+                    
                     <div class="card-body text-center">
                         <%= link_to user_profile_path(@service.user.username) do %>
                             <h2 class="card-title">by: <%= @service.user.username %> </h2>
                             <% end %>
+                            <p><strong>Email:</strong> <%= @service.user.email %> </p>
+                            <p><strong>Number:</strong> 0813114677</p>
                         <div class="d-flex justify-content-center align-items-center">
                             <span class="ml-2"><%= display_stars(@avg_rating) %></span>
                             <span class="ml-2">(<%= @reviews.size %> reviews)</span>
@@ -92,8 +94,7 @@
                                 <%= link_to "Leave A Review", new_service_review_path(@service), class: "btn btn-primary btn-block mt-3" %>
                             </div>
                         <% end %>
-                        <a href="#" class="btn btn-primary btn-block mt-3">Call</a>
-                        <a href="#" class="btn btn-secondary btn-block">Chat</a>
+                        
                     </div>
                 </div>
             </div>
