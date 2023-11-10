@@ -30,6 +30,12 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :phone_number, "Phone Number (Optional)" %>
+          <%= f.text_field :phone_number, autocomplete: "tel", class: "form-control" %>
+          <small class="text-muted">Must start with 0 and have 10 digits</small>
+        </div>
+
+        <div class="form-group">
           <%= f.label :email %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>

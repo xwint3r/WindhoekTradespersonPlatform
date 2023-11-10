@@ -45,12 +45,18 @@ class ServicesController < ApplicationController
     end
 
     def search_by_location
-      @services = Service.includes(:location, :reviews).searchlocation(params)
+      @services = Service.includes(:location, :reviews)
+                        .where(location_id: Location.find_by(name: params[:location]).id)
+                        .sort_by { |service| [service.location.name, -service.reviews.average(:rating).to_f] }
     end
+    
 
     def search_by_category
-      @services = Service.includes(:location, :reviews).where(category_id: params[:category])
+      @services = Service.includes(:location, :reviews)
+                        .where(category_id: params[:category])
+                        .sort_by { |service| -service.reviews.average(:rating).to_f }
     end
+    
 
     def create
       @service = current_user.services.build(service_params)
@@ -84,6 +90,7 @@ class ServicesController < ApplicationController
       unless current_user == @service.user
         redirect_to root_path, alert: "You are not authorized to edit this service."
       end
+      
     end
 
     def update
@@ -93,25 +100,38 @@ class ServicesController < ApplicationController
         redirect_to root_path, alert: "You are not authorized to update this service."
         return
       end
-    
-      service_location = Geocoder.search(@service.location_id).first
-      service_coordinates = [service_location.latitude, service_location.longitude] if service_location.present?
-    
-      windhoek_center = [-22.5598, 17.0832] # Coordinates for the center of Windhoek
-    
-      distance_to_windhoek = Geocoder::Calculations.distance_between(service_coordinates, windhoek_center)
 
-      maximum_allowed_distance = 10
-    
-      if distance_to_windhoek > maximum_allowed_distance
-        flash[:error] = "Please select a location within Windhoek, Namibia."
-        render :edit
-      elsif @service.update(service_params)
+      if @service.update(service_params)
         redirect_to @service, notice: "Service was successfully updated."
       else
         flash[:danger] = @service.errors.full_messages.to_sentence
         render :edit
       end
+
+
+    
+      #service_location = Geocoder.search(@service.location_id).first
+      #service_coordinates = [service_location.latitude, service_location.longitude] if service_location.present?
+    
+      #windhoek_center = [-22.5598, 17.0832] # Coordinates for the center of Windhoek
+    
+      #distance_to_windhoek = Geocoder::Calculations.distance_between(service_coordinates, windhoek_center)
+
+      #maximum_allowed_distance = 10
+    
+      #if distance_to_windhoek > maximum_allowed_distance
+      #  flash[:error] = "Please select a location within Windhoek, Namibia."
+      #  render :edit
+      #elsif @service.update(service_params)
+      #  redirect_to @service, notice: "Service was successfully updated."
+      #else
+      #  flash[:danger] = @service.errors.full_messages.to_sentence
+      #  render :edit
+      #end
+
+    end
+
+    def destroy
     end
     
   

@@ -7,11 +7,11 @@
   <div class="col">
     <%= form_tag search_services_path, method: :get do |f| %>
       <div class="input-group my-4">
-        <%= text_field_tag :search, nil, placeholder: "Plumber...", class: "form-control" %>
+        <%= text_field_tag :search, nil, placeholder: "Find a sPlumber...", class: "form-control" %>
       </div>
       <div class="input-group my-4">
         <div class="input-group-prepend">
-          <%= text_field_tag :location, nil, placeholder: "Academia...", class: "form-control" %>
+          <%= text_field_tag :location, nil, placeholder: "Neighbourhood e.g. Academia...", class: "form-control", size: "30" %>
         </div>
 
         <div class="input-group-append">
@@ -39,9 +39,11 @@
             <%= link_to service_path(service) do %>
               <h2 class="card-title"><%= service.name %></h2>
             <% end %>
+
             <%= link_to user_profile_path(service.user.username) do %>
               <h5>by: <%= service.user.username %> </h5>
             <% end %>
+
             <div class="bubble">
               <span>Price: <%= number_to_currency(service.price) %></span>
             </div>
@@ -50,7 +52,7 @@
               <div class="bubble">
                 <span>Category: <%= service.category.name %></span>
               </div>
-              <% end %>
+            <% end %>
 
             <%= link_to search_by_location_services_path(location: service.location.name) do %>
               <div class="bubble">

@@ -84,7 +84,11 @@
                             <h2 class="card-title">by: <%= @service.user.username %> </h2>
                             <% end %>
                             <p><strong>Email:</strong> <%= @service.user.email %> </p>
-                            <p><strong>Number:</strong> 0813114677</p>
+
+                            <% if @service.user.phone_number.present? %>
+                                <p><strong>Number:</strong> <%= @service.user.phone_number %></p>
+                            <% end %>
+
                         <div class="d-flex justify-content-center align-items-center">
                             <span class="ml-2"><%= display_stars(@avg_rating) %></span>
                             <span class="ml-2">(<%= @reviews.size %> reviews)</span>

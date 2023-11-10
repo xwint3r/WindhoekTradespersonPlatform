@@ -1,3 +1,5 @@
+<div class="content">
+<div class="wrapper">
 <% if @services.present? %>
 <% @services.each do |service| %>
     <div class="col-md-12 mb-4">
@@ -12,12 +14,20 @@
           <div class="bubble">
             <span>Price: <%= number_to_currency(service.price) %></span>
           </div>
-          <div class="bubble">
-            <span>Category: <%= service.category.name %></span>
-          </div>
-          <div class="bubble">
-            <span>Location: <%= service.location.name %></span>
-          </div>
+
+          <%= link_to search_by_category_services_path(category: service.category.id) do %>
+            <div class="bubble">
+              <span>Category: <%= service.category.name %></span>
+            </div>
+            <% end %>
+
+          <%= link_to search_by_location_services_path(location: service.location.name) do %>
+            <div class="bubble">
+              <span>Location: <%= service.location.name %></span>
+            </div>
+          <% end %>
+
+
           <div class="bubble">
             <% if service.reviews.present? %>
               <%= display_stars(service.reviews.average(:rating).round(0)) %>
@@ -32,3 +42,5 @@
 <% else %>
     <p>No services found.</p>
 <% end %>
+</div>
+</div>

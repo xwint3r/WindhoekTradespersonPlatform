@@ -1,3 +1,4 @@
+<% content_for :title, @services.first.category.name %>
 <% if @services.present? %>
   <h2>Services in <%= @services.first.category.name %></h2>
 <% @services.each do |service| %>

@@ -20,7 +20,9 @@ class Service < ApplicationRecord
   mount_uploaders :service_pictures, ServicePictureUploader # Use CarrierWave uploader for the image
   serialize :service_pictures, JSON # Ensure that you're using JSON if the database doesn't natively support array types
 
-  
+  def self.ransackable_attributes(auth_object = nil)
+    ["category_id", "city", "country", "created_at", "description", "id", "latitude", "location", "location_id", "longitude", "name", "price", "region", "service_pictures", "street_address", "updated_at", "user_id"]
+  end
 
   def full_address
     [street_address, location.name, city, region, country].compact.join(', ')
