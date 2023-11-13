@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
+  root to: "services#index"
+
+
   resources :services do
     resources :reviews, except: [:index, :show]
     collection do
@@ -13,12 +16,9 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "services#index"
-
   get "/about_us", to: "pages#about_us"
   get "/contact_us", to: "pages#contact_us" 
-  
-
+   
   get "/profile", to: "users#show", as: "current_user_profile"
   get "/profile/:username", to: "users#show_by_username", as: "user_profile"
 
