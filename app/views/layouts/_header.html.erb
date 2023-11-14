@@ -15,6 +15,9 @@
             <%= link_to "Profile", current_user_profile_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
+            <%= link_to "Chat", rooms_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% else %>
