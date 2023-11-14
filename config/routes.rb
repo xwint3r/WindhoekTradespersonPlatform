@@ -36,5 +36,5 @@ resources :rooms do
 end
 
 # Custom user route
-#get 'user/:id', to: 'users#show', as: 'user'
+get 'user/:id', to: 'users#show', as: 'user'
 end
