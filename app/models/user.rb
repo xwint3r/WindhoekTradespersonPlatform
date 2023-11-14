@@ -9,6 +9,8 @@ class User < ApplicationRecord
     has_many :reviews, dependent: :destroy
     has_many :favorites, dependent: :destroy
 
+    scope :all_except, ->(user) { where.not(id: user) }
+
     # roles that say what kind of user they are
     enum role: { customer: 0, businessperson: 1, admin: 2 }
 
