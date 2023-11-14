@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 devise_for :admin_users, ActiveAdmin::Devise.config
 devise_for :users, controllers: { registrations: 'users/registrations' }
 
+ActiveAdmin.routes(self)
+
+
+
 #devise_scope :user do
 #  get 'users', to: 'devise/sessions#new'
 #end
