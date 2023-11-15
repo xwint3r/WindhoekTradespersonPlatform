@@ -8,8 +8,16 @@ class User < ApplicationRecord
     has_many :services, dependent: :destroy
     has_many :reviews, dependent: :destroy
     has_many :favorites, dependent: :destroy
+    has_many :messages,  dependent: :destroy
 
+    # used to display all users except the current user
+    #change to (somehow) only show users that have started a chat with them
     scope :all_except, ->(user) { where.not(id: user) }
+
+
+    # broadcast that a new user has been added
+    after_create_commit { broadcast_append_to "users" }
+
 
     # roles that say what kind of user they are
     enum role: { customer: 0, businessperson: 1, admin: 2 }

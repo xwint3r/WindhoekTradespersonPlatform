@@ -6,6 +6,9 @@ class UsersController < ApplicationController
       redirect_to user_profile_path(current_user.username)
     end
 
+    def show_chat
+    end
+
     def show_by_username
       @user = User.find_by(username: params[:username])
       @avg_rating_total = @user.average_rating

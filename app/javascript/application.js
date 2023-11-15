@@ -2,8 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import jQuery from "jquery";
-window.jQuery = jQuery;
-window.$ = jQuery;
+//import jQuery from "jquery";
+//window.jQuery = jQuery;
+//window.$ = jQuery;
 
-import "jquery.raty.js";
+//import "jquery.raty.js";

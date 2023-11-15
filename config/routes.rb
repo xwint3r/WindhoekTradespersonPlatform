@@ -35,6 +35,10 @@ resources :rooms do
   resources :messages
 end
 
-# Custom user route
-get 'user/:id', to: 'users#show', as: 'user'
+# Custom user route. Change user#show
+get 'user/:id', to: 'users#show_chat', as: 'user'
+
+# testing
+#get 'test_turbo_stream', to: 'pages#test_turbo_stream'
+
 end

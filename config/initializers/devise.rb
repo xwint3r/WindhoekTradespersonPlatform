@@ -3,6 +3,7 @@
 # Turbo doesn't work with devise by default.
 # Keep tabs on https://github.com/heartcombo/devise/issues/5446 for a possible fix
 # Fix from https://gorails.com/episodes/devise-hotwire-turbo
+
 class TurboFailureApp < Devise::FailureApp
   def respond
     if request_format == :turbo_stream
