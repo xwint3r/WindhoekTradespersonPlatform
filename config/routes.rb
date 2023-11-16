@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
   # Devise routes
 devise_for :admin_users, ActiveAdmin::Devise.config
+
+# Allows for the customisations added to the registrations controller in devise
+#  to be accepted
 devise_for :users, controllers: { registrations: 'users/registrations' }
 
+#allow routing to active admin stuff
 ActiveAdmin.routes(self)
-
-
-
-#devise_scope :user do
-#  get 'users', to: 'devise/sessions#new'
-#end
 
 # Root path
 root to: "services#index"

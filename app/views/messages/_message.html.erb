@@ -8,5 +8,8 @@
     <div>
       <%= message.body %>
     </div>
+      <div class="text-right">
+          <p class="small"><%= time_ago_in_words(message.created_at) %> ago</p>
+      </div>
   </div>
 </div>

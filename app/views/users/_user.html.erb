@@ -1,3 +1,8 @@
-<div>
-    <%= link_to user.username, user %>
-</div>
+<% if @single_room && @single_room.participant?(@single_room, user) %>
+  <% isActive = 'active' %>
+<% else %>
+  <% isActive = '' %>
+<% end %>
+<li class="list-group-item d-flex align-items-center justify-content-between user_list_item <%= isActive %>">
+  <%= link_to user.username, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+</li>
