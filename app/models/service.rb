@@ -10,7 +10,6 @@ class Service < ApplicationRecord
   validates_presence_of :price
   validates_presence_of :location_id
   validates_presence_of :category_id
-  validates_presence_of :location
 
 
   validate :validate_image
