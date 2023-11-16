@@ -60,23 +60,8 @@ class ServicesController < ApplicationController
 
     def create
       @service = current_user.services.build(service_params)
-  
-      # Get the latitude and longitude of the provided address
-      location = Geocoder.search(@service.location_id).first
-      service_coordinates = [location.latitude, location.longitude] if location.present?
-  
-      # Restrict the service creation to a specific area (Windhoek, Namibia)
-      windhoek_center = [-22.5598, 17.0832] # Coordinates for the center of Windhoek
-  
-      # Calculate the distance between the service coordinates and Windhoek center
-      distance_to_windhoek = Geocoder::Calculations.distance_between(service_coordinates, windhoek_center)
-
-      maximum_allowed_distance = 10
-  
-      if distance_to_windhoek > maximum_allowed_distance
-        flash[:error] = "Please select a location within Windhoek, Namibia."
-        render :new
-      elsif @service.save
+      
+      if @service.save
         redirect_to @service, notice: "Service was successfully created."
       else
         flash[:danger] = @service.errors.full_messages.to_sentence
@@ -108,28 +93,6 @@ class ServicesController < ApplicationController
         flash[:danger] = @service.errors.full_messages.to_sentence
         render :edit
       end
-
-
-    
-      #service_location = Geocoder.search(@service.location_id).first
-      #service_coordinates = [service_location.latitude, service_location.longitude] if service_location.present?
-    
-      #windhoek_center = [-22.5598, 17.0832] # Coordinates for the center of Windhoek
-    
-      #distance_to_windhoek = Geocoder::Calculations.distance_between(service_coordinates, windhoek_center)
-
-      #maximum_allowed_distance = 10
-    
-      #if distance_to_windhoek > maximum_allowed_distance
-      #  flash[:error] = "Please select a location within Windhoek, Namibia."
-      #  render :edit
-      #elsif @service.update(service_params)
-      #  redirect_to @service, notice: "Service was successfully updated."
-      #else
-      #  flash[:danger] = @service.errors.full_messages.to_sentence
-      #  render :edit
-      #end
-
     end
 
     def destroy
