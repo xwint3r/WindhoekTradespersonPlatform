@@ -80,7 +80,10 @@ class ServicesController < ApplicationController
         redirect_to @service, notice: "Service was successfully created."
       else
         flash[:danger] = @service.errors.full_messages.to_sentence
-        render :new
+        respond_to do |format|
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('new_service_form', partial: 'services/new_form', locals: { service: @service }) }
+          format.html { render :new }
+        end
       end
     end
 
