@@ -13,6 +13,8 @@ gem "activeadmin"
 
 gem "sassc"
 
+gem 'bootstrap', '~> 4.3.1'
+
 gem "devise"
 
 gem "geocoder"

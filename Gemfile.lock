@@ -80,10 +80,16 @@ GEM
     arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
+    autoprefixer-rails (10.4.15.0)
+      execjs (~> 2)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     capybara (3.39.2)
       addressable
@@ -114,6 +120,7 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.12.0)
+    execjs (2.9.1)
     faker (3.2.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3-x64-mingw-ucrt)
@@ -189,6 +196,7 @@ GEM
     nokogiri (1.15.4-x64-mingw-ucrt)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    popper_js (1.16.1)
     public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
@@ -243,6 +251,12 @@ GEM
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -259,6 +273,7 @@ GEM
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
     thor (1.2.2)
+    tilt (2.3.0)
     timeout (0.4.0)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
@@ -289,6 +304,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootsnap
+  bootstrap (~> 4.3.1)
   capybara
   carrierwave (~> 3.0)
   debug

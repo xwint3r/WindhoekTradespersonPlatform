@@ -132,12 +132,17 @@ class ServicesController < ApplicationController
     end
 
     def destroy
+      @service = Service.find(params[:id])
+      @service.destroy
+      redirect_to @user, notice: "Service was successfully deleted."
     end
+    
+    
     
   
     private  
     def service_params
-      params.require(:service).permit(:name, :description, :price, :location_id, :category_id, {service_pictures: [], service_pictures_cache: [] })
+      params.require(:service).permit(:name, :description, :price, :location_id, :category_id, :country, :city, :street_address, {service_pictures: [], service_pictures_cache: [] })
       #encapsulate and whitelist the parameters that are accepted when creating or updating a service
     end    
 

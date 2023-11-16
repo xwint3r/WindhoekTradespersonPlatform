@@ -10,6 +10,8 @@ class Service < ApplicationRecord
   validates_presence_of :price
   validates_presence_of :location_id
   validates_presence_of :category_id
+  validates_presence_of :location
+
 
   validate :validate_image
 
@@ -25,8 +27,9 @@ class Service < ApplicationRecord
   end
 
   def full_address
-    [street_address, location.name, city, region, country].compact.join(', ')
+    [street_address, location&.name, city, region, country].compact.join(', ')
   end
+  
   
   def self.search(params)
     services = Service.all
