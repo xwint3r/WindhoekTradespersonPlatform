@@ -15,7 +15,7 @@ gem "sassc"
 
 gem 'bootstrap', '~> 4.3.1'
 
-gem "devise"
+gem "devise", github: "heartcombo/devise", branch: "main"
 
 gem "geocoder"
 
