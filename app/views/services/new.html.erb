@@ -3,7 +3,7 @@
     <div class="col-md-6 offset-md-3">
       <h2 class="text-center">New Service</h2>
 
-      <%= form_for(@service, html: { multipart: true }, data: {turbo: false}) do |f| %>
+      <%= form_for(@service, html: { multipart: true }) do |f| %>
         <div class="form-group">
           <% if @service.errors.any? %>
             <div class="alert alert-danger">
