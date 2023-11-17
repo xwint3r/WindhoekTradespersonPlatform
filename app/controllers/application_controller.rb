@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
 
     private
 
-  def turbo_frame_request_variant
-    request.variant = :turbo_frame if turbo_frame_request?
-  end
+    def turbo_frame_request_variant
+      request.variant = :turbo_frame if turbo_frame_request?
+    end
 
 
 end

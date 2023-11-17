@@ -20,7 +20,8 @@
         <h4 class="text-center"> <%= @user&.username || @single_room.name %> </h4>
         <%= turbo_stream_from @single_room %>
         <div id="messages" data-controller="scroll">
-          <%= render @messages %>
+        <%= turbo_frame_tag "page_handler" %>
+          <%= render "messages/pager", pagy: @pagy %>
         </div>
         <%= render 'layouts/new_message_form' %>
       </div>
