@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
 
     include Pagy::Backend
-    before_action :turbo_frame_request_varient
+    before_action :turbo_frame_request_variant
 
 
     protected
