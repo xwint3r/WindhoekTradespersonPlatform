@@ -101,6 +101,18 @@ class ServicesController < ApplicationController
       redirect_to @user, notice: "Service was successfully deleted."
     end
     
+    def book
+      @service = Service.find(params[:id])
+      @user = @service.user
+      @room_name = get_name(current_user, @user)
+      @single_room = Room.where(name: @room_name).first_or_create
+    
+      # Create a message with details about the service
+      message_body = "Hi, I'm interested in your #{@service.name} service."
+      @message = @single_room.messages.create(user: current_user, body: message_body)
+    
+      redirect_to room_path(@single_room)
+    end
     
     
   

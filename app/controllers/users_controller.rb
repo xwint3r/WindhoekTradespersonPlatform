@@ -39,6 +39,13 @@ class UsersController < ApplicationController
       render 'rooms/index'
     end
 
+    def start_chat
+      @other_user = User.find(params[:id])
+      @room_name = get_name(current_user, @other_user)
+      @single_room = Room.where(name: @room_name).first_or_create
+      redirect_to room_path(@single_room)
+    end
+
     private
 
     # creating a unique name for the conversation consisting of the two users ids 

@@ -14,6 +14,10 @@ class User < ApplicationRecord
     #change to (somehow) only show users that have started a chat with them
     scope :all_except, ->(user) { where.not(id: user) }
 
+    def self.with_messages
+      joins(:messages).where.not(messages: { body: nil }).distinct
+    end
+
 
     # broadcast that a new user has been added
     after_create_commit { broadcast_append_to "users" }

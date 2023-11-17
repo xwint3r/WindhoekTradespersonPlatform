@@ -18,6 +18,10 @@ resources :services do
   collection do
     get 'search', 'search_by_location', 'search_by_category'
   end
+
+  member do
+    get 'book'
+  end
 end
 
 # Pages routes
@@ -35,5 +39,7 @@ end
 
 # Custom user route. Change user#show
 get 'user/:id', to: 'users#show_chat', as: 'user'
+
+get 'user/:id/start_chat', to: 'users#start_chat', as: 'start_chat'
 
 end

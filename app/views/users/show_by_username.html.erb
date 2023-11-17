@@ -28,6 +28,8 @@
           <p>Bio: A brief description of the tradesman and their services.</p>
           <!-- Buttons start-->
 
+          <%= link_to "Start Chat", user_path(@user, room: true), class: "btn btn-primary" %>
+
           <% if @user == current_user %>
           
             <% if @user.businessperson? %> <!-- Check if the user is a businessperson -->

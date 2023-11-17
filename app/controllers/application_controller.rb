@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
 
     private
 
+    # creating a unique name for the conversation consisting of the two users ids 
+    # ensuring the order is maintained
+    def get_name(user1, user2)
+      user = [user1, user2].sort
+      "private_#{user[0].id}_#{user[1].id}"
+    end
+
     def turbo_frame_request_variant
       request.variant = :turbo_frame if turbo_frame_request?
     end
