@@ -20,7 +20,8 @@ resources :services do
   end
 
   member do
-    get 'book'
+    get 'book_advanced'
+    post 'submit_advanced_booking'
   end
 end
 

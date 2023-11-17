@@ -1,0 +1,35 @@
+<!-- book_advanced.html.erb -->
+<%= form_with(url: submit_advanced_booking_service_path(@service), method: :post, class: 'mt-4') do |form| %>
+  <h2 class="mb-3"><%= @service.name %></h2>
+  <h5 class="mb-4">by <%= @user.username %></h5>
+
+  <%= form.hidden_field :user_id, value: @user.id %>
+  <%= form.hidden_field :service_name, value: @service.name %>
+
+  <!-- Additional Message Field -->
+  <div class="mb-3">
+    <%= form.label :additional_message, 'Optional Details - Additional Message', class: 'form-label' %>
+    <%= form.text_area :additional_message, class: 'form-control', placeholder: 'Include more details about what you need' %>
+  </div>
+
+  <!-- Phone Number Field -->
+  <div class="mb-3">
+    <%= form.label :number, 'Optional Details - Phone Number', class: 'form-label' %>
+    <%= form.telephone_field :number, class: 'form-control' %>
+  </div>
+
+  <!-- Email Field -->
+  <div class="mb-3">
+    <%= form.label :email, 'Optional Details - Email', class: 'form-label' %>
+    <%= form.email_field :email, class: 'form-control' %>
+  </div>
+
+  <!-- Address Field -->
+  <div class="mb-3">
+    <%= form.label :address, 'Optional Details - Address (where do you need the service conducted)', class: 'form-label' %>
+    <%= form.text_field :address, class: 'form-control' %>
+  </div>
+
+  <!-- Submit Button -->
+  <%= form.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>

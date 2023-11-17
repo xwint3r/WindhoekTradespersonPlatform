@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
 
-    before_action :authenticate_user!, only: [:create, :new] # This ensures the user is logged in
+    before_action :authenticate_user!, only: [:create, :new, :book_advanced, :submit_advanced_booking] # This ensures the user is logged in
     before_action :is_service_user, only: [:edit, :update] # this ensures only the service user can edit and update
     before_action :is_businessperson, only: [:create, :edit, :update] # this ensures only a bsuiness person can create edit and update a service
     before_action :is_businessperson_new_service, only: [:new] # This ensure only the owner of the profile can add a new service to their profile
@@ -101,18 +101,76 @@ class ServicesController < ApplicationController
       redirect_to @user, notice: "Service was successfully deleted."
     end
     
-    def book
+    #def book
+    #  @service = Service.find(params[:id])
+    #  @user = @service.user
+    #  @room_name = get_name(current_user, @user)
+    #  @single_room = Room.where(name: @room_name).first_or_create
+    
+      # Create a message with details about the service
+    #  message_body = "Hi, I'm interested in your #{@service.name} service."
+    #  @message = @single_room.messages.create(user: current_user, body: message_body)
+    
+    #  redirect_to room_path(@single_room)
+    #end
+    
+
+    def book_advanced
       @service = Service.find(params[:id])
       @user = @service.user
       @room_name = get_name(current_user, @user)
       @single_room = Room.where(name: @room_name).first_or_create
     
+      # Additional details for the form
+      @service_name = @service.name
+      @user_name = @user.username
+      @service_location = @service.location.name
+      @service_price = @service.price
+    
+      # Prepare a new message with placeholders for additional details
+      @message_body = "Hi, I'm interested in your #{@service_name} service.\n"
+    
+      render 'book_advanced'
+    end
+    
+  
+    def submit_advanced_booking
+      # Handle form submission here
+      # Access form data through params hash
+      # params[:user_id], params[:service_name], params[:additional_message], params[:number], params[:email], params[:address]
+    
+      # Create a message with detailed information
+      message_body = "Hi, I'm interested in your #{params[:service_name]} service."
+    
+      if params[:additional_message].present?
+        message_body += "\nFor more details: #{params[:additional_message]}"
+      end
+    
+      if params[:number].present?
+        message_body += "\nMy number is #{params[:number]}."
+      end
+    
+      if params[:email].present?
+        message_body += "\nMy email is #{params[:email]}."
+      end
+    
+      if params[:address].present?
+        message_body += "\nI stay at #{params[:address]}."
+      end
+    
+      # Assuming you already have @user defined, adjust it as needed
+      @user = User.find(params[:user_id])
+    
+      @room_name = get_name(current_user, @user)
+      # Assuming you have a method to get or create a room
+      @single_room = Room.where(name: @room_name).first_or_create
+    
       # Create a message with details about the service
-      message_body = "Hi, I'm interested in your #{@service.name} service."
       @message = @single_room.messages.create(user: current_user, body: message_body)
     
       redirect_to room_path(@single_room)
     end
+    
     
     
   

@@ -94,7 +94,8 @@
                             <span class="ml-2">(<%= @reviews.size %> reviews)</span>
                         </div>
 
-                        <%= link_to "Book Service", book_service_path(@service), class: "btn btn-primary btn-block mt-3" %>
+                        <%= link_to 'Book Service', book_advanced_service_path(@service), class: 'btn btn-primary btn-block mt-3' %>
+
 
 
                         <% unless @service.user == current_user %>
