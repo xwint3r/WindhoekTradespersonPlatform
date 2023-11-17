@@ -22,6 +22,11 @@
         <div id="messages" data-controller="scroll">
         <%= turbo_frame_tag "page_handler" %>
           <%= render "messages/pager", pagy: @pagy %>
+
+          <div id="messages-container">
+          <%= render @messages %>
+          </div>
+
         </div>
         <%= render 'layouts/new_message_form' %>
       </div>
