@@ -25,7 +25,7 @@ export default class Autoclick extends Controller {
 
       setTimeout(() => {
         Autoclick.topMessage.scrollIntoView({
-          behavior: "auto",
+          behavior: "smooth",
           block: "end",
         });
         console.log("Scrolling");
