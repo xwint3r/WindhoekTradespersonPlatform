@@ -3,7 +3,6 @@ body{
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 
@@ -209,10 +208,3 @@ footer {
 .rating input[type="radio"]:checked ~ label {
     color: #FFD700; /* Change color for selected stars */
 }
-
-
-/* Chat Styles */
-/* body {
-    overflow: hidden;
-  } */
- 
