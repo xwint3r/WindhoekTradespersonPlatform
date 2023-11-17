@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
+  before_action :authenticate_user!, only: [:show, :start_chat]
 
     def show
       @user = current_user
@@ -51,6 +51,7 @@ class UsersController < ApplicationController
     # creating a unique name for the conversation consisting of the two users ids 
     # ensuring the order is maintained
     def get_name(user1, user2)
+      return unless user1 && user2
       user = [user1, user2].sort
       "private_#{user[0].id}_#{user[1].id}"
     end

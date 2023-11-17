@@ -28,7 +28,9 @@
           <p>Bio: A brief description of the tradesman and their services.</p>
           <!-- Buttons start-->
 
-          <%= link_to "Start Chat", user_path(@user, room: true), class: "btn btn-primary" %>
+          <% if user_signed_in? %> <!-- Check if the user is signed in -->
+            <%= link_to "Start Chat", user_path(@user, room: true), class: "btn btn-primary" %>
+          <% end %>
 
           <% if @user == current_user %>
           
