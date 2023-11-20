@@ -2,9 +2,11 @@ class Service < ApplicationRecord
   belongs_to :user
   belongs_to :category
   belongs_to :location
+
   has_many :reviews, dependent: :destroy
   has_many :images, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :price

@@ -1,6 +1,8 @@
 class Message < ApplicationRecord
-  belongs_to :user, dependent: :destroy
-  belongs_to :room, dependent: :destroy
+  belongs_to :user
+  belongs_to :room
+  belongs_to :participant
+  
   after_create_commit { broadcast_append_to room }
   before_create :confirm_participant
 

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     def show_by_username
-      @user = User.find_by(username: params[:username])
+      @user = current_user
       @avg_rating_total = @user.average_rating
       @num_of_reviews = @user.total_num_ratings
 

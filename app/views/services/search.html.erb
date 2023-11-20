@@ -8,9 +8,13 @@
           <%= link_to service_path(service) do %>
             <h2 class="card-title"><%= service.name %></h2>
           <% end %>
-            <%= link_to user_profile_path(service.user.username) do %>
-              <h5>by: <%= service.user.username %> </h5>
+            <% if service.user.present? %>
+              <%= link_to user_profile_path(service.user.username) do %>
+                <h5>by: <%= service.user.username %> </h5>
               <% end %>
+            <% else %>
+              <h5>by: Unknown User</h5>
+            <% end %>
           <div class="bubble">
             <span>Price: <%= number_to_currency(service.price) %></span>
           </div>

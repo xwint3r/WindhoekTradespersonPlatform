@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_15_194300) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_20_042050) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -137,9 +137,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_15_194300) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "messages", "rooms"
-  add_foreign_key "messages", "users"
+  add_foreign_key "messages", "rooms", on_delete: :cascade
+  add_foreign_key "messages", "users", on_delete: :cascade
   add_foreign_key "participants", "rooms"
   add_foreign_key "participants", "users"
+  add_foreign_key "reviews", "users", on_delete: :cascade
   add_foreign_key "services", "locations"
 end

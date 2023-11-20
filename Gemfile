@@ -88,3 +88,6 @@ group :test do
 end
 
 gem "pagy", "~> 6.2"
+
+gem 'byebug'
+

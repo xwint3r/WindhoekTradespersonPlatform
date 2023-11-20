@@ -1,5 +1,5 @@
 class Review < ApplicationRecord
-    belongs_to :user, dependent: :destroy
+    belongs_to :user
     belongs_to :service, dependent: :destroy
 
     # only have one review UNCOMMENT LATER

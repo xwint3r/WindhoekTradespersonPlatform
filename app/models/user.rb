@@ -8,7 +8,9 @@ class User < ApplicationRecord
     has_many :services, dependent: :destroy
     has_many :reviews, dependent: :destroy
     has_many :favorites, dependent: :destroy
-    has_many :messages,  dependent: :destroy
+    has_many :messages                                            # dependent: :destroy
+    has_many :participants, dependent: :destroy                   # Add this line
+    has_many :rooms, through: :participants                       # added to test # deleted "dependent: :destroy "
 
     # used to display all users except the current user
     #change to (somehow) only show users that have started a chat with them
