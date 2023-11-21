@@ -7,12 +7,15 @@
         
         <div class="card-body text-center">
           <h2 class="card-title"><%= @user.username %></h2> <!-- Display the logged-in user's username -->
-          <div><p><strong>Email:</strong> <%= @user.email %></p></div>
+            <div>
+              <p><strong>Email:</strong> <%= mail_to @user.email %></p>
+            </div>
 
-          <!-- <% if @user.phone_number.present? %> -->
-            <!-- <div><p><strong>Number:</strong> <%= @service.user.phone_number %></p></div> -->
-          <!-- <% end %> -->
-
+            <% if @user.phone_number.present? %> 
+              <div>
+                <p><strong>Number:</strong> <%= link_to @user.phone_number, "tel:#{@user.phone_number}" %></p>
+              </div> 
+            <% end %>
           <div class="d-flex justify-content-center align-items-center">
 
           <% if @avg_rating_total.present? %>                                                          
@@ -28,17 +31,16 @@
           <p>Bio: A brief description of the tradesman and their services.</p>
           <!-- Buttons start-->
 
-          <% if user_signed_in? %> <!-- Check if the user is signed in -->
+          <% if user_signed_in? && @user != current_user %> <!-- Check if the user is signed in and not the current user -->
             <%= link_to "Start Chat", user_path(@user, room: true), class: "btn btn-primary" %>
           <% end %>
 
-          <% if @user == current_user %>
-          
+
+          <% if @user == current_user %>          
             <% if @user.businessperson? %> <!-- Check if the user is a businessperson -->
               <%= link_to "Add Service", new_service_path, class: "btn btn-primary" %>
             <% end %>
             <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
-
           <% end %>
 
           <!-- Buttons end -->
@@ -53,50 +55,56 @@
 
       <!-- Service Cards -->
 
-      <% @user.services.each do |service| %> <!-- Loop through the user's services -->
-        <div class="col-md-12 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-body d-flex align-items-center">
+        <% if @user.services.empty? %>
+          <p>You don't have any services yet? Let's get you started!     
+          <%= link_to new_service_path, class: "btn btn-primary" do %>
+            Get Started <i class="fas fa-plus"></i>
+          <% end %>
+        <% else %>
+          <% @user.services.each do |service| %>
+            <div class="col-md-12 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-body d-flex align-items-center">
 
-                <%= link_to service_path(service) do %>
-                  <h2 class="card-title"><%= service.name %></h2>
-                <% end %>
+                    <%= link_to service_path(service) do %>
+                      <h2 class="card-title"><%= service.name %></h2>
+                    <% end %>
 
-                <% if service.user == current_user %>
-                  <%= link_to "Edit Service", edit_service_path(service), class: "btn btn-primary btn-sm mr-2" %>
-                <% end %>
-              </div>      
-              <div class="bubble">
-                <span>Price: <%= number_to_currency(service.price) %></span>
-              </div>
-              
-              <%= link_to search_by_category_services_path(category: service.category.id), class: "location-link" do %>
-              <div class="bubble">
-                <span>Category: <%= service.category.name %></span>
-              </div>
-              <% end %>
+                    <% if service.user == current_user %>
+                      <%= link_to "Edit Service", edit_service_path(service), class: "btn btn-primary btn-sm mr-2" %>
+                    <% end %>
+                  </div>      
+                  <div class="bubble">
+                    <span>Price: <%= number_to_currency(service.price) %></span>
+                  </div>
+                  
+                  <%= link_to search_by_category_services_path(category: service.category.id), class: "location-link" do %>
+                  <div class="bubble">
+                    <span>Category: <%= service.category.name %></span>
+                  </div>
+                  <% end %>
 
-              <%= link_to search_by_location_services_path(location: service.location.name), class: "location-link" do %>
-              <div class="bubble">
-                <span>Location: <%= service.location.name %></span>
-              </div>
-              <% end %>
+                  <%= link_to search_by_location_services_path(location: service.location.name), class: "location-link" do %>
+                  <div class="bubble">
+                    <span>Location: <%= service.location.name %></span>
+                  </div>
+                  <% end %>
 
 
-
-              <div class="bubble">
-                <% if service.reviews.present? %>
-                  <%= display_stars(service.reviews.average(:rating).round(0)) %>
-                <% else %>
-                  No rating
-                <% end %>
+                  <div class="bubble">
+                    <% if service.reviews.present? %>
+                      <%= display_stars(service.reviews.average(:rating).round(0)) %>
+                    <% else %>
+                      No rating
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      <% end %>
-      <!-- Add more service cards as needed -->
+          <% end %>
+        <% end %>
+      <!-- End of service cards -->
     </div>
   </div>
 </div>

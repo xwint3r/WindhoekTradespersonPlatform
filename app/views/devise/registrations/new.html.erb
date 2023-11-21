@@ -27,6 +27,11 @@
         <%= f.text_field :lastname, autocomplete: "family-name", class: "form-control" %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+        
       <div class="form-group"> 
 	      <%= f.label :username %> <%= f.text_field :username, autocomplete: "username", class: "form-control" %> 
       </div>
@@ -37,11 +42,6 @@
         <small class="text-muted">Must start with 0 and have 10 digits</small>
       </div>
 
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-      </div>
-        
       <div class="form-group">
         <%= f.label :password %>
         <% if @minimum_password_length %>
