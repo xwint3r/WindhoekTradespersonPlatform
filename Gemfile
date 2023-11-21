@@ -11,7 +11,7 @@ gem "sprockets-rails"
 
 gem "activeadmin"
 
-gem "sassc"
+gem "sassc" # remove this later
 
 gem 'bootstrap', '~> 4.3.1'
 
