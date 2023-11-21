@@ -97,7 +97,6 @@
                         <%= link_to 'Book Service', book_advanced_service_path(@service), class: 'btn btn-primary btn-block mt-3' %>
 
 
-
                         <% unless @service.user == current_user %>
                             <div class="d-flex justify-content-center align-items-center">
                                 <%= link_to "Leave A Review", new_service_review_path(@service), class: "btn btn-primary btn-block mt-3" %>

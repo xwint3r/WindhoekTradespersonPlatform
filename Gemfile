@@ -11,9 +11,9 @@ gem "sprockets-rails"
 
 gem "activeadmin"
 
-gem "sassc"
+gem 'dartsass-sprockets'
 
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 5.3.2'
 
 gem "devise", github: "heartcombo/devise", branch: "main"
 

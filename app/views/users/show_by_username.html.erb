@@ -7,41 +7,44 @@
         
         <div class="card-body text-center">
           <h2 class="card-title"><%= @user.username %></h2> <!-- Display the logged-in user's username -->
-          <div><p><strong>Email:</strong> <%= @user.email %></p></div>
+          <div>
+              <p><strong>Email:</strong> <%= mail_to @user.email %></p>
+            </div>
 
-          <% if @user.phone_number.present? %>
-            <div><p><strong>Number:</strong> <%= @service.user.phone_number %></p></div>
-          <% end %>
-
-          <div class="d-flex justify-content-center align-items-center">
-
-          <% if @avg_rating_total.present? %>                                                          
-           <span class="ml-2"><p>Average Rating: <%= display_stars(@avg_rating_total) %></p></span>  
-           <span class="ml-2"><p>(<%= @num_of_reviews %> reviews)</p></span>                         
-          <% else %>                                                                                   
-           <p>No reviews yet</p>                                                                        
-          <% end %>                                                                                    
-
-          </div>
-          <p>Joined <%= @user.created_at.strftime("%Y") %></p> <!-- Assuming the user model has a 'created_at' attribute -->
-          <p>Number of services: <%= @user.services.count %></p> <!-- Display the count of user's services -->
-          <p>Bio: A brief description of the tradesman and their services.</p>
-          <!-- Buttons start-->
-
-          <%= link_to "Start Chat", user_path(@user, room: true), class: "btn btn-primary" %>
-
-          <% if @user == current_user %>
-          
-            <% if @user.businessperson? %> <!-- Check if the user is a businessperson -->
-              <%= link_to "Add Service", new_service_path, class: "btn btn-primary" %>
+            <% if @user.phone_number.present? %> 
+              <div>
+                <p><strong>Number:</strong> <%= link_to @user.phone_number, "tel:#{@user.phone_number}" %></p>
+              </div> 
             <% end %>
-            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
 
-          <% end %>
+            <div class="d-flex justify-content-center align-items-center">
 
+            <% if @avg_rating_total.present? %>                                                          
+            <span class="ml-2"><p>Average Rating: <%= display_stars(@avg_rating_total) %></p></span>  
+            <span class="ml-2"><p>(<%= @num_of_reviews %> reviews)</p></span>                         
+            <% else %>                                                                                   
+            <p>No reviews yet</p>                                                                        
+            <% end %>                                                                                    
+
+            </div>
+            <p>Joined <%= @user.created_at.strftime("%Y") %></p> <!-- Assuming the user model has a 'created_at' attribute -->
+            <p>Number of services: <%= @user.services.count %></p> <!-- Display the count of user's services -->
+            <p>Bio: A brief description of the tradesman and their services.</p>
+            <!-- Buttons start-->
+
+            <!-- start chatting button -->
+            <% if user_signed_in? && @user != current_user %> <!-- Check if the user is signed in and not the current user -->
+              <%= link_to "Start Chat", user_path(@user, room: true), class: "btn btn-primary" %>
+            <% end %>
+            <!-- start chatting button end -->
+          
+            <% if @user == current_user %>          
+              <% if @user.businessperson? %> <!-- Check if the user is a businessperson -->
+                <%= link_to "Add Service", new_service_path, class: "btn btn-primary" %>
+              <% end %>
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
+            <% end %>
           <!-- Buttons end -->
-
-
         </div>
       </div>
     </div>
@@ -50,7 +53,12 @@
       <h2>Services</h2>
 
       <!-- Service Cards -->
-
+    <% if @user.services.empty? %>
+      <p>You don't have any services yet? Let's get you started!     
+      <%= link_to new_service_path, class: "btn btn-primary" do %>
+        Get Started <i class="fas fa-plus"></i>
+      <% end %>
+    <% else %>
       <% @user.services.each do |service| %> <!-- Loop through the user's services -->
         <div class="col-md-12 mb-4">
           <div class="card">
@@ -94,6 +102,7 @@
           </div>
         </div>
       <% end %>
+     <% end %> 
       <!-- Add more service cards as needed -->
     </div>
   </div>
